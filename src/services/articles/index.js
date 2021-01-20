@@ -22,6 +22,7 @@ router.get("/:id", async (req, res, next) => {
   });
   router.post("/", async (req, res, next) => {
     try {
+        const {headline,subhead,content,categoryid,authorid,cover,id} = req.body
       const result = await
        db.query(`INSERT INTO articles (headline,subhead,content,categoryid,authorid,cover,id) VALUES ('${headline}','${subhead}','${content}','${categoryid}','${authorid}','${cover}','${id}');`);
       res.send("Added");
