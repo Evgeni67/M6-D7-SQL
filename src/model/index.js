@@ -11,6 +11,38 @@ class Model {
             throw new Error(e)
         }
     }
+
+ async getEverything(id){
+     if(!id ){
+         throw new Error ('Provide id')
+     }
+     const query = `SELECT articles.id as article_id,articles.headline as article_headline, authors.name as author_name, categories.name as category_name
+     FROM articles 
+     INNER JOIN authors
+     ON authors.id = articles.authorid
+     INNER JOIN categories
+     ON categories.id = articles.categoryid
+     WHERE articles.id = ${id}`
+     const res = await run (query)
+     return response
+ }
+
+async getArticlesByContent(content){
+    if(!id){
+        throw new Error('Provide id')
+    }
+    const query = `SELECT * FROM articles WHERE articles.content LIKE '%${content}%'`
+    const res = await db.query(query)
+    return res
+}
+async getArticlesByHeadline(headline){
+    if(!id){
+        throw new Error('Provide id')
+    }
+    const query = `SELECT * FROM articles WHERE articles.headline LIKE '%${headline}%'`
+    const res = await db.query(query)
+    return res
+}
  async findById(id){
      if(!id){
          throw new Error('Provide id')
