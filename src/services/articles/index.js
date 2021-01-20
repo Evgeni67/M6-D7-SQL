@@ -22,9 +22,8 @@ router.get("/:id", async (req, res, next) => {
   });
   router.post("/", async (req, res, next) => {
     try {
-        const {headline,subhead,content,category,author,cover,id} = req.body
       const result = await
-       db.query(`INSERT INTO articles (headline,subhead,content,category,author,cover,id) VALUES ('${headline}','${subhead}','${content}','${category}','${author}','${cover}','${id}');`);
+       db.query(`INSERT INTO articles (headline,subhead,content,categoryid,authorid,cover,id) VALUES ('${headline}','${subhead}','${content}','${categoryid}','${authorid}','${cover}','${id}');`);
       res.send("Added");
     } catch (e) {
       console.log(e);
@@ -34,7 +33,7 @@ router.get("/:id", async (req, res, next) => {
   router.put("/:id", async (req, res, next) => {
     try {
         const {headline,subhead,content,category,author,cover,id} = req.body
-        const query = `UPDATE articles SET headline='${headline}',subhead='${subhead}', content='${content}', category='${category}', author='${author}', cover='${cover}', id='${id}' WHERE id=${req.params.id}`
+        const query = `UPDATE articles SET headline='${headline}',subhead='${subhead}', content='${content}', categoryid='${category}', authorid='${author}', cover='${cover}', id='${id}' WHERE id=${req.params.id}`
       const result = await db.query(query);
       res.send(result);
     } catch (e) {
